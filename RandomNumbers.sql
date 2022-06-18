@@ -1,26 +1,25 @@
 ------------------------------------------------------------------
--- Gerar números aleatórios no SQL Server
+-- Gerar nÃºmeros aleatÃ³rios no SQL Server
 ------------------------------------------------------------------
  
 ----------------------------------------------
 -- Utilizando NEWID
 ----------------------------------------------
-
--- 1: Inteiro aleatório
+-- 1: Inteiro aleatÃ³rio
 SELECT
     NEWID() AS String,
     CHECKSUM(NEWID()) AS Numero
  
--- 2: Inteiro aleatório positivo
+-- 2: Inteiro aleatÃ³rio positivo
 SELECT ABS(CHECKSUM(NEWID())) AS Resultado
  
--- 3: Inteiro aleatório entre -100 e 100
+-- 3: Inteiro aleatÃ³rio entre -100 e 100
 SELECT CHECKSUM(NEWID()) %101 AS Resultado 
  
--- 4: Inteiro aleatório entre 1 e 100
+-- 4: Inteiro aleatÃ³rio entre 1 e 100
 SELECT (ABS(CHECKSUM(NEWID())) % 100) + 1 AS Resultado
  
--- 5: Número inteiro com até X digitos
+-- 5: NÃºmero inteiro com atÃ© X digitos
 SELECT LEFT(CHECKSUM(NEWID()), 5) AS Resultado
  
 -- 6: BIGINT
@@ -34,7 +33,7 @@ SELECT CONVERT(FLOAT, LEFT(CONVERT(VARCHAR, CONVERT(BIGINT, CONVERT(VARBINARY(8)
  
  
 ----------------------------------------------
--- Gerando listas de números aleatórios
+-- Gerando listas de nÃºmeros aleatÃ³rios
 ----------------------------------------------
 -- 1: Usando CTE recursiva (meu preferido!)
 WITH CTE_Seq AS (
@@ -66,19 +65,19 @@ GO 50
 ----------------------------------------------
 -- Outras formas
 ----------------------------------------------
--- FC matemática rand e rand com seed
--- OBS: Ao executar os dois comandos juntos o valor não é aleatório
+-- FC matemÃ¡tica rand e rand com seed
+-- OBS: Ao executar os dois comandos juntos o valor nÃ£o Ã© aleatÃ³rio
 SELECT RAND()
 SELECT RAND(123)
  
--- FC matemática rand (inteiro em um range)
+-- FC matemÃ¡tica rand (inteiro em um range)
 DECLARE @maior INT;
 DECLARE @menor INT
-SET @menor = 1 ---- menor número
-SET @maior = 60 ---- maior número
+SET @menor = 1 ---- menor nÃºmero
+SET @maior = 60 ---- maior nÃºmero
 SELECT ROUND(((@maior - @menor -1) * RAND() + @menor), 0)
  
--- FC matemática rand (decimal)
+-- FC matemÃ¡tica rand (decimal)
 -- Entre 0 e 20 (decimal)
 SELECT 20 * RAND()
 -- Entre 10 e 30
@@ -92,4 +91,4 @@ SELECT (DATEPART(NS, SYSDATETIME()))
  
  
  
--- Créditos: https://dba-pro.com/como-gerar-numeros-aleatorios-no-sql/
+-- CrÃ©ditos: https://dba-pro.com/como-gerar-numeros-aleatorios-no-sql/
